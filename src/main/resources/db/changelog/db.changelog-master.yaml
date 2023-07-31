@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - include:
+      file: /db/changelog/changes/create-company-seq.sql
+  - include:
+      file: /db/changelog/changes/create-company-table.sql
+  - include:
+      file: /db/changelog/changes/create-tag-seq.sql
+  - include:
+      file: /db/changelog/changes/create-tag-table.sql
+  - include:
+      file: /db/changelog/changes/create-location-seq.sql
+  - include:
+      file: /db/changelog/changes/create-location-table.sql
+  - include:
+      file: /db/changelog/changes/create-function-seq.sql
+  - include:
+      file: /db/changelog/changes/create-function-table.sql
+  - include:
+      file: /db/changelog/changes/create-job-seq.sql
+  - include:
+      file: /db/changelog/changes/create-job-table.sql
+  - include:
+      file: /db/changelog/changes/create-job_tag-table.sql
+  - include:
+      file: /db/changelog/changes/create-job_location-table.sql
+  - include:
+      file: /db/changelog/changes/create-job_function-table.sql
