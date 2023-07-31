@@ -1,5 +1,6 @@
 package app.webscrapingconsole.service.impl;
 
+import static app.webscrapingconsole.util.ConstantsUtil.CONSOLE_DIALOG;
 import static app.webscrapingconsole.util.ConstantsUtil.jobFunctionMap;
 
 import app.webscrapingconsole.exception.DataProcessingException;
@@ -35,10 +36,7 @@ public class ConsoleServiceImpl implements ConsoleService {
     public void run() {
         Set<String> jobFunctions = jobFunctionMap.keySet();
         jobFunctions.stream().sorted().forEach(System.out::println);
-        System.out.println(
-                "Hello! Enter the job function from the list above to scrape and, after a space,"
-                        + " specify approximate number of jobs you'd like to receive"
-                        + " or 'quit' to exit:");
+        System.out.println("Hello! " + CONSOLE_DIALOG);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             String input;
             List<Job> jobs;
@@ -63,10 +61,7 @@ public class ConsoleServiceImpl implements ConsoleService {
                             + System.lineSeparator()
                             + Paths.get(scrapingResult).toAbsolutePath());
                 }
-                System.out.println(
-                        "Enter the job function from the list above to scrape and, after a comma,"
-                                + " specify approximate number of jobs you'd like to receive"
-                                + " or 'quit' to exit:");
+                System.out.println(CONSOLE_DIALOG);
             }
             System.exit(0);
         } catch (IOException e) {
