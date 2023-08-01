@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class JsoupDocumentUntil {
+public class JsoupDocumentUtil {
     private static final String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
             + "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5.2 Safari/605.1.15";
 
-    private JsoupDocumentUntil() {
+    private JsoupDocumentUtil() {
     }
 
     public static Document getDocument(String url) {

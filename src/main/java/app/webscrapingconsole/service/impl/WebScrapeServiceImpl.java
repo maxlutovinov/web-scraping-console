@@ -22,7 +22,7 @@ import app.webscrapingconsole.service.JobService;
 import app.webscrapingconsole.service.LocationService;
 import app.webscrapingconsole.service.TagService;
 import app.webscrapingconsole.service.WebScrapeService;
-import app.webscrapingconsole.util.JsoupDocumentUntil;
+import app.webscrapingconsole.util.JsoupDocumentUtil;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public class WebScrapeServiceImpl implements WebScrapeService {
     @Override
     public List<Job> scrapeJobs(String url, int requestedJobsNumber) {
         url = getUrlWithFoundJobs(url, requestedJobsNumber);
-        Document doc = JsoupDocumentUntil.getDocument(url);
+        Document doc = JsoupDocumentUtil.getDocument(url);
         Elements jobElements = doc.getElementsByAttributeValue(MAIN_ATTR, JOB_ITEM);
         List<Job> jobs = new ArrayList<>();
         for (Element jobElement : jobElements) {
@@ -102,7 +102,7 @@ public class WebScrapeServiceImpl implements WebScrapeService {
                 String jobUrl = titleElements.get(0).attr("href");
                 if (jobUrl.startsWith("/")) {
                     jobUrl = scrapingUrl + jobUrl;
-                    Document jobDocument = JsoupDocumentUntil.getDocument(jobUrl);
+                    Document jobDocument = JsoupDocumentUtil.getDocument(jobUrl);
                     functionElements = jobDocument.getElementsByClass(FUNCTIONS_CLASS);
                     String[] divElements = functionElements.get(0).toString()
                             .split(" </div>")[0]
@@ -194,7 +194,7 @@ public class WebScrapeServiceImpl implements WebScrapeService {
     }
 
     private static String getUrlWithFoundJobs(String url, int requestedJobsNumber) {
-        Document doc = JsoupDocumentUntil.getDocument(url);
+        Document doc = JsoupDocumentUtil.getDocument(url);
         int foundJobs = Integer.parseInt(
                 doc.getElementsByTag("b").text()
                         .replace(",", ""));
