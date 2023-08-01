@@ -1,5 +1,6 @@
 package app.webscrapingconsole.service.impl;
 
+import app.webscrapingconsole.exception.DataProcessingException;
 import app.webscrapingconsole.service.FileWriterService;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filePath))) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file: " + filePath, e);
+            throw new DataProcessingException("Can't write data to file: " + filePath, e);
         }
     }
 }
