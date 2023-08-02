@@ -199,7 +199,7 @@ public class WebScrapeServiceImpl implements WebScrapeService {
                 doc.getElementsByTag("b").text()
                         .replace(",", ""));
         int maxPagesNumber = (int) Math.ceil(foundJobs / 20.0);
-        int requestedPagesNumber = (int) Math.rint(requestedJobsNumber / 20.0);
+        int requestedPagesNumber = (int) Math.ceil(requestedJobsNumber / 20.0);
         requestedPagesNumber = Math.min(requestedPagesNumber, maxPagesNumber);
         url = url + "&page=" + requestedPagesNumber;
         return url;
