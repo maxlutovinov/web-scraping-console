@@ -34,8 +34,8 @@ public class ConstantsUtil {
             Map.entry("Software Engineering",
                     "eyJqb2JfZnVuY3Rpb25zIjpbIlNvZnR3YXJlIEVuZ2luZWVyaW5nIl19"));
     public static final String CONSOLE_DIALOG = "Enter the job function from the list above "
-            + "to scrape and, after a comma, specify approximate number of jobs you'd like "
-            + "to receive or 'quit' to exit:";
+            + "to scrape and, after a comma, specify number of jobs, a multiple of 20, "
+            + "you'd like to receive or 'quit' to exit:";
 
     private ConstantsUtil() {
     }

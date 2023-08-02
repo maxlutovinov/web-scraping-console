@@ -45,14 +45,13 @@ public class ConsoleServiceImpl implements ConsoleService {
                 int requestedJobsNumber;
                 try {
                     requestedJobsNumber = Math.abs(Integer.parseInt(
-                            jobFunctionAndJobsNumber[jobFunctionAndJobsNumber.length - 1]));
+                            jobFunctionAndJobsNumber[jobFunctionAndJobsNumber.length - 1].trim()));
                 } catch (NumberFormatException e) {
                     requestedJobsNumber = 20;
                 }
                 String jobFunction = jobFunctionAndJobsNumber[0];
                 if (!isJobFunction(jobFunction, jobFunctions)) {
                     System.out.println("No such job function");
-
                 } else {
                     jobs = webScrapeService.scrapeJobs(scrapingUrl + "/jobs?filter="
                             + jobFunctionMap.get(jobFunction), requestedJobsNumber);
