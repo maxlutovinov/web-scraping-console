@@ -11,7 +11,7 @@
 ## Description
 
 This is a Java console application that web scrapes public information from a job search site by job function 
-(category) and stores it in a local database and write in [JSON file](src/main/resources/scraping_result.json) and console.
+(category), stores it in a local database, and writes to [JSON file](src/main/resources/scraping_result.json) and console.
 
 ## Structure
 
@@ -27,7 +27,7 @@ package.
 
 ## Technology stack
 
-Java 17, Hibernate, PostgeSQL, Spring Boot, Spring Web, Spring Data JPA, Maven, Jsoup, JSON, Lombok, Liquibase.
+Java 17, Hibernate, PostgeSQL, Spring Boot, Spring Data JPA, Maven, Jsoup, JSON, Lombok, Liquibase.
 
 ## Usage
 
