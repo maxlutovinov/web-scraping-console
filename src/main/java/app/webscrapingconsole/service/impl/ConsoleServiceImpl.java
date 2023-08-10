@@ -1,7 +1,6 @@
 package app.webscrapingconsole.service.impl;
 
 import static app.webscrapingconsole.util.ConstantsUtil.CONSOLE_DIALOG;
-import static app.webscrapingconsole.util.ConstantsUtil.jobFunctionMap;
 
 import app.webscrapingconsole.exception.DataProcessingException;
 import app.webscrapingconsole.model.Job;
@@ -13,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,10 +21,12 @@ import org.springframework.stereotype.Service;
 public class ConsoleServiceImpl implements ConsoleService {
     private final WebScrapeService webScrapeService;
     private final FileWriterService fileWriterService;
-    @Value("${web-scraping.result}")
+    @Value("${app.scraping-result}")
     private String scrapingResult;
-    @Value("${web-scraping.url}")
+    @Value("${app.scraping-url}")
     private String scrapingUrl;
+    @Value("#{${app.jobFunction-map}}")
+    private Map<String,String> jobFunctionMap;
 
     public ConsoleServiceImpl(WebScrapeService webScrapeService,
                               FileWriterService fileWriterService) {
