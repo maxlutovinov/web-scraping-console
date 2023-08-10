@@ -19,10 +19,10 @@ import app.webscrapingconsole.model.Tag;
 import app.webscrapingconsole.service.CompanyService;
 import app.webscrapingconsole.service.JobFunctionService;
 import app.webscrapingconsole.service.JobService;
+import app.webscrapingconsole.service.JsoupDocumentService;
 import app.webscrapingconsole.service.LocationService;
 import app.webscrapingconsole.service.TagService;
 import app.webscrapingconsole.service.WebScrapeService;
-import app.webscrapingconsole.util.JsoupDocumentUtil;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -44,25 +44,28 @@ public class WebScrapeServiceImpl implements WebScrapeService {
     private final CompanyService companyService;
     private final LocationService locationService;
     private final JobFunctionService jobFunctionService;
-    @Value("${web-scraping.url}")
+    private final JsoupDocumentService jsoupDocumentService;
+    @Value("${app.scraping-url}")
     private String scrapingUrl;
 
     public WebScrapeServiceImpl(JobService jobService,
                                 TagService tagService,
                                 CompanyService companyService,
                                 LocationService locationService,
-                                JobFunctionService jobFunctionService) {
+                                JobFunctionService jobFunctionService,
+                                JsoupDocumentService jsoupDocumentService) {
         this.jobService = jobService;
         this.tagService = tagService;
         this.companyService = companyService;
         this.locationService = locationService;
         this.jobFunctionService = jobFunctionService;
+        this.jsoupDocumentService = jsoupDocumentService;
     }
 
     @Override
     public List<Job> scrapeJobs(String url, int requestedJobsNumber) {
         url = getUrlWithFoundJobs(url, requestedJobsNumber);
-        Document doc = JsoupDocumentUtil.getDocument(url);
+        Document doc = jsoupDocumentService.getDocument(url);
         Elements jobElements = doc.getElementsByAttributeValue(MAIN_ATTR, JOB_ITEM);
         List<Job> jobs = new ArrayList<>();
         for (Element jobElement : jobElements) {
@@ -102,7 +105,7 @@ public class WebScrapeServiceImpl implements WebScrapeService {
                 String jobUrl = titleElements.get(0).attr("href");
                 if (jobUrl.startsWith("/")) {
                     jobUrl = scrapingUrl + jobUrl;
-                    Document jobDocument = JsoupDocumentUtil.getDocument(jobUrl);
+                    Document jobDocument = jsoupDocumentService.getDocument(jobUrl);
                     functionElements = jobDocument.getElementsByClass(FUNCTIONS_CLASS);
                     String[] divElements = functionElements.get(0).toString()
                             .split(" </div>")[0]
@@ -193,8 +196,8 @@ public class WebScrapeServiceImpl implements WebScrapeService {
         return jobs;
     }
 
-    private static String getUrlWithFoundJobs(String url, int requestedJobsNumber) {
-        Document doc = JsoupDocumentUtil.getDocument(url);
+    private String getUrlWithFoundJobs(String url, int requestedJobsNumber) {
+        Document doc = jsoupDocumentService.getDocument(url);
         int foundJobs = Integer.parseInt(
                 doc.getElementsByTag("b").text()
                         .replace(",", ""));
