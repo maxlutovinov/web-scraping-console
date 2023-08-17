@@ -19,6 +19,27 @@ Example for PostgreSQL database:
     spring.datasource.password=12345678
     spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 
-### Run
-* Open and run in IDEA
-* Follow the instructions in the console
+### Build 
+
+From the root directory of the project:
+
+    ./mvnw package -DskipTests
+
+If this fails, install Maven and run the following command:
+
+    mvn package -DskipTests
+
+### Run 
+
+#### On Command line:
+
+From the root directory of the project:
+
+    java -jar target/web-scraping-console-0.0.1-SNAPSHOT.jar
+
+#### In IntelliJ IDEA
+
+Open the project in IDEA and run WebScrapingConsoleApplication class.
+
+### Use
+Follow the instructions in the console.
