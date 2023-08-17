@@ -26,7 +26,7 @@ public class ConsoleServiceImpl implements ConsoleService {
     @Value("${app.scraping-url}")
     private String scrapingUrl;
     @Value("#{${app.jobFunction-map}}")
-    private Map<String,String> jobFunctionMap;
+    private Map<String, String> jobFunctionMap;
 
     public ConsoleServiceImpl(WebScrapeService webScrapeService,
                               FileWriterService fileWriterService) {
