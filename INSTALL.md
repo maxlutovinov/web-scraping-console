@@ -1,8 +1,33 @@
 # Installation
 
-### Clone
+<!-- TOC -->
+* [Installation](#installation)
+  * [Clone](#clone)
+  * [Run with Docker](#run-with-docker)
+  * [Run locally](#run-locally)
+    * [Create database](#create-database)
+    * [Set up connection to database](#set-up-connection-to-database)
+    * [Build and run on the command line](#build-and-run-on-the-command-line)
+    * [Run in IntelliJ IDEA](#run-in-intellij-idea)
+  * [Use](#use)
+<!-- TOC -->
+
+## Clone
 
     git clone https://github.com/maxlutovinov/web-scraping-console.git
+
+> **Note:**  
+> All the following terminal/cmd commands are executed from the root directory of the project.
+
+## Run with Docker
+
+Install Docker first. After that, pull the application image and then run it:
+
+    docker pull maxlutovinov/web-scraping-console
+
+    docker compose run --rm app
+
+## Run locally
 
 ### Create database
 
@@ -19,27 +44,21 @@ Example for PostgreSQL database:
     spring.datasource.password=12345678
     spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 
-### Build 
-
-From the root directory of the project:
+### Build and run on the command line
 
     ./mvnw package -DskipTests
 
-If this fails, install Maven and run the following command:
+If this fails, install Maven and execute the following build command:
 
     mvn package -DskipTests
 
-### Run 
-
-#### On Command line:
-
-From the root directory of the project:
+Then run the jar:
 
     java -jar target/web-scraping-console-0.0.1-SNAPSHOT.jar
 
-#### In IntelliJ IDEA
+### Run in IntelliJ IDEA
 
 Open the project in IDEA and run WebScrapingConsoleApplication class.
 
-### Use
-Follow the instructions in the console.
+## Use
+After launching the application, follow the instructions in the console.

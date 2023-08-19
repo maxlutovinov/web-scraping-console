@@ -27,7 +27,7 @@ package.
 
 ## Technology stack
 
-Java 17, Hibernate, PostgeSQL, Spring Boot, Spring Data JPA, Maven, Jsoup, JSON, Lombok, Liquibase.
+Java 17, Hibernate, PostgeSQL, Spring Boot, Spring Data JPA, Maven, Jsoup, JSON, Lombok, Liquibase, Docker.
 
 ## Usage
 
