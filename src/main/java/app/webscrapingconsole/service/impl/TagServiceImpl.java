@@ -23,4 +23,9 @@ public class TagServiceImpl implements TagService {
     public Optional<Tag> findByTitle(String title) {
         return tagRepository.findByTitle(title);
     }
+
+    @Override
+    public boolean isApplicable(Class<?> entityClass) {
+        return entityClass.equals(Tag.class);
+    }
 }

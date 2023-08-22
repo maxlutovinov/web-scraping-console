@@ -5,7 +5,8 @@ create TABLE IF NOT EXISTS public.job(
     title character varying(256) NOT NULL,
     posted_date bigint NOT NULL,
     company_id bigint NOT NULL,
-    url character varying(1024) NOT NULL,
+    job_url character varying(1024) NOT NULL,
+    job_application_url character varying(1024),
     description character varying(10240),
     PRIMARY KEY(id),
     CONSTRAINT fk_company

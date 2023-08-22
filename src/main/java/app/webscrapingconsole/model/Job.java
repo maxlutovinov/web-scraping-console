@@ -33,18 +33,20 @@ public class Job {
     private Long id;
     private String title;
     @Column(columnDefinition = "TEXT")
-    private String url;
+    private String jobUrl;
+    @Column(columnDefinition = "TEXT")
+    private String jobApplicationUrl;
     private Long postedDate;
     @ManyToMany
     @JoinTable(name = "job_function",
                joinColumns = @JoinColumn(name = "job_id"),
                inverseJoinColumns = @JoinColumn(name = "function_id"))
-    private Set<JobFunction> jobFunction;
+    private Set<JobFunction> jobFunctions;
     @ManyToMany
     @JoinTable(name = "job_location",
                joinColumns = @JoinColumn(name = "job_id"),
                inverseJoinColumns = @JoinColumn(name = "location_id"))
-    private List<Location> location;
+    private List<Location> locations;
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
@@ -88,12 +90,13 @@ public class Job {
     public String toString() {
         return "{\"id\":" + id + ","
                 + "\"title\":\"" + title + "\","
-                + "\"url\":\"" + url + "\","
-                + "\"jobFunction\":" + jobFunction + ","
-                + "\"location\":" + location + ","
+                + "\"url\":\"" + jobUrl + "\","
+                + "\"jobFunctions\":" + jobFunctions + ","
+                + "\"locations\":" + locations + ","
                 + "\"postedDate\":" + postedDate + ","
                 + "\"tags\":" + tags + ","
                 + "\"company\":" + company + ","
+                + "\"jobApplicationUrl\":\"" + jobApplicationUrl + "\","
                 + "\"description\":\"" + description + "\"}";
     }
 }

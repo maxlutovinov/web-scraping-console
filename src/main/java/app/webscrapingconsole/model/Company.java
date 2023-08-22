@@ -28,8 +28,6 @@ public class Company {
     private Long id;
     private String title;
     @Column(columnDefinition = "TEXT")
-    private String url;
-    @Column(columnDefinition = "TEXT")
     private String logo;
 
     @Override
@@ -64,7 +62,6 @@ public class Company {
     public String toString() {
         return "{\"id\":" + id + ","
                 + "\"title\":\"" + title + "\","
-                + "\"url\":\"" + url + "\","
                 + "\"logo\":\"" + logo + "\"}";
     }
 }

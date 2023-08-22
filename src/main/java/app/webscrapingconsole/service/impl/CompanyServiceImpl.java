@@ -23,4 +23,9 @@ public class CompanyServiceImpl implements CompanyService {
     public Optional<Company> findByTitle(String title) {
         return companyRepository.findByTitle(title);
     }
+
+    @Override
+    public boolean isApplicable(Class<?> entityClass) {
+        return entityClass.equals(Company.class);
+    }
 }

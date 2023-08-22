@@ -23,4 +23,9 @@ public class JobFunctionServiceImpl implements JobFunctionService {
     public Optional<JobFunction> findByTitle(String title) {
         return jobFunctionRepository.findByTitle(title);
     }
+
+    @Override
+    public boolean isApplicable(Class<?> entityClass) {
+        return entityClass.equals(JobFunction.class);
+    }
 }

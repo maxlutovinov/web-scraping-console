@@ -24,7 +24,7 @@ public class JobServiceImpl implements JobService {
     @Override
     public void deleteAllByUrl(List<Job> jobs) {
         for (Job job : jobs) {
-            jobRepository.deleteByUrl(job.getUrl());
+            jobRepository.deleteByJobUrl(job.getJobUrl());
         }
     }
 }
