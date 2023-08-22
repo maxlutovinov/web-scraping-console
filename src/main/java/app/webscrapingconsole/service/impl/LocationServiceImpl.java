@@ -23,4 +23,9 @@ public class LocationServiceImpl implements LocationService {
     public Optional<Location> findByTitle(String title) {
         return locationRepository.findByTitle(title);
     }
+
+    @Override
+    public boolean isApplicable(Class<?> entityClass) {
+        return entityClass.equals(Location.class);
+    }
 }

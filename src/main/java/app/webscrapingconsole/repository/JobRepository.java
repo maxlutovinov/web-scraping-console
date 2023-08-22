@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long> {
-    void deleteByUrl(String url);
+    void deleteByJobUrl(String url);
 }
