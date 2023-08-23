@@ -7,6 +7,7 @@ import app.webscrapingconsole.model.Job;
 import app.webscrapingconsole.service.ConsoleService;
 import app.webscrapingconsole.service.FileWriterService;
 import app.webscrapingconsole.service.WebScrapeService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -57,7 +58,9 @@ public class ConsoleServiceImpl implements ConsoleService {
                 } else {
                     jobs = webScrapeService.scrapeJobs(scrapingUrl + "/jobs?filter="
                             + jobFunctionMap.get(jobFunction), requestedJobsNumber);
-                    fileWriterService.writeFile(jobs.toString(), scrapingResult);
+                    String jsonJobs = new ObjectMapper().writeValueAsString(jobs);
+                    System.out.println(jsonJobs);
+                    fileWriterService.writeFile(jsonJobs, scrapingResult);
                     System.out.println("Scraping result saved to DB and write to file:"
                             + System.lineSeparator()
                             + Paths.get(scrapingResult).toAbsolutePath());
