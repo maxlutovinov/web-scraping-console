@@ -154,7 +154,6 @@ public class WebScrapeServiceImpl implements WebScrapeService {
         }
         jobService.deleteAllByUrl(jobs);
         jobService.saveAll(jobs);
-        jobs.forEach(System.out::println);
         return jobs;
     }
 
