@@ -35,7 +35,7 @@ public class Job {
     @Column(columnDefinition = "TEXT")
     private String jobUrl;
     @Column(columnDefinition = "TEXT")
-    private String jobApplicationUrl;
+    private String jobApplicationUrl = "NOT_FOUND";
     private Long postedDate;
     @ManyToMany
     @JoinTable(name = "job_function",
@@ -56,7 +56,7 @@ public class Job {
                inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Tag> tags;
     @Column(columnDefinition = "TEXT")
-    private String description;
+    private String description = "NOT_FOUND";
 
     @Override
     public final boolean equals(Object o) {
