@@ -15,9 +15,12 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+@Log4j2
 @Service
 public class ConsoleServiceImpl implements ConsoleService {
     private final WebScrapeService webScrapeService;
@@ -38,34 +41,27 @@ public class ConsoleServiceImpl implements ConsoleService {
     @Override
     public void run() {
         Set<String> jobFunctions = jobFunctionMap.keySet();
-        jobFunctions.stream().sorted().forEach(System.out::println);
-        System.out.println("Hello! " + CONSOLE_DIALOG);
+        log.info(System.lineSeparator() + "\u001B[33m"
+                + jobFunctions.stream().sorted().collect(Collectors.joining(System.lineSeparator()))
+                + "\u001B[0m" + System.lineSeparator()
+                + "Hello! " + CONSOLE_DIALOG);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             String input;
             List<Job> jobs;
             while (!(input = reader.readLine()).equals("quit")) {
-                String[] jobFunctionAndJobsNumber = input.split(",");
-                int requestedJobsNumber;
-                try {
-                    requestedJobsNumber = Math.abs(Integer.parseInt(
-                            jobFunctionAndJobsNumber[jobFunctionAndJobsNumber.length - 1].trim()));
-                } catch (NumberFormatException e) {
-                    requestedJobsNumber = 20;
-                }
-                String jobFunction = jobFunctionAndJobsNumber[0];
-                if (!isJobFunction(jobFunction, jobFunctions)) {
-                    System.out.println("No such job function");
+                if (!isJobFunction(input, jobFunctions)) {
+                    log.info(System.lineSeparator() + "No such job function");
                 } else {
                     jobs = webScrapeService.scrapeJobs(scrapingUrl + "/jobs?filter="
-                            + jobFunctionMap.get(jobFunction), requestedJobsNumber);
+                            + jobFunctionMap.get(input));
                     String jsonJobs = new ObjectMapper().writeValueAsString(jobs);
-                    System.out.println(jsonJobs);
                     fileWriterService.writeFile(jsonJobs, scrapingResult);
-                    System.out.println("Scraping result saved to DB and write to file:"
+                    log.info(System.lineSeparator()
+                            + "Scraping result saved to DB and write to file:"
                             + System.lineSeparator()
                             + Paths.get(scrapingResult).toAbsolutePath());
                 }
-                System.out.println(CONSOLE_DIALOG);
+                log.info(System.lineSeparator() + CONSOLE_DIALOG);
             }
             System.exit(0);
         } catch (IOException e) {
