@@ -11,7 +11,7 @@
 ## Description
 
 This is a Java console application that web scrapes public information from a job search site by job function 
-(category), stores it in a local database, and writes to [JSON file](scraping_result.json) and console.
+(category), stores it in a local database, and writes to [JSON file](scraping_result.json).
 
 ## Structure
 
