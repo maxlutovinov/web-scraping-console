@@ -56,8 +56,7 @@ public class WebScrapeServiceImpl implements WebScrapeService {
     }
 
     @Override
-    public List<Job> scrapeJobs(String url, int requestedJobsNumber) {
-        url = getUrlWithFoundJobs(url, requestedJobsNumber);
+    public List<Job> scrapeJobs(String url) {
         Document doc = jsoupDocumentService.getDocument(url);
         Elements jobElements = doc.getElementsByAttributeValue(MAIN_ATTR, JOB_ITEM);
         List<Job> jobs = new ArrayList<>();
@@ -155,18 +154,6 @@ public class WebScrapeServiceImpl implements WebScrapeService {
         jobService.deleteAllByUrl(jobs);
         jobService.saveAll(jobs);
         return jobs;
-    }
-
-    private String getUrlWithFoundJobs(String url, int requestedJobsNumber) {
-        Document doc = jsoupDocumentService.getDocument(url);
-        int foundJobs = Integer.parseInt(
-                doc.getElementsByTag("b").text()
-                        .replace(",", ""));
-        int maxPagesNumber = (int) Math.ceil(foundJobs / 20.0);
-        int requestedPagesNumber = (int) Math.ceil(requestedJobsNumber / 20.0);
-        requestedPagesNumber = Math.min(requestedPagesNumber, maxPagesNumber);
-        url = url + "&page=" + requestedPagesNumber;
-        return url;
     }
 
     private <T> T getEntity(String title, Class<T> entityClass) {

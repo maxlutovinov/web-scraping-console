@@ -28,7 +28,7 @@ public class Company {
     private Long id;
     private String title;
     @Column(columnDefinition = "TEXT")
-    private String logo;
+    private String logo = "NOT_FOUND";
 
     @Override
     public final boolean equals(Object o) {

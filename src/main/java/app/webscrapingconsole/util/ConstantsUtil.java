@@ -13,8 +13,7 @@ public class ConstantsUtil {
     public static final String JOB_FILTER = "filter_id";
     public static final String FUNCTIONS_CLASS = "sc-beqWaB sc-gueYoa dmdAKU MYFxR";
     public static final String CONSOLE_DIALOG = "Enter the job function from the list above "
-            + "to scrape and, after a comma, specify number of jobs, a multiple of 20, "
-            + "you'd like to receive or 'quit' to exit:";
+            + "or 'quit' to exit:";
 
     private ConstantsUtil() {
     }
